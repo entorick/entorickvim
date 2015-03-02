@@ -78,6 +78,22 @@ map <F2> :NERDTreeToggle<CR>
 
 
 " taglist配置 taglist use exuberant ctags
+let Tlist_Auto_Highlight_Tag=1
+let Tlist_Auto_Open=0
+let Tlist_Auto_Update=1
+let Tlist_Close_On_Select=0
+let Tlist_Compact_Format=0
+let Tlist_Display_Prototype=0
+let Tlist_Display_Tag_Scope=1
+let Tlist_Enable_Fold_Column=0
+let Tlist_GainFocus_On_ToggleOpen=1
+let Tlist_Hightlight_Tag_On_BufEnter=1
+let Tlist_Inc_Winwidth=0
+let Tlist_Max_Submenu_Items=1
+let Tlist_Max_Tag_Length=30
+let Tlist_Process_File_Always=0
+let Tlist_Show_Menu=0
+let Tlist_Sort_Type="order"
 let Tlist_Ctags_Cmd='/usr/bin/ctags' " ctags程序位置，不知道可以用which ctags查看
 let Tlist_Show_One_File=1 "不同时显示多个文件的tag，只显示当前文件的
 let Tlist_Exit_OnlyWindow=1 "如果taglist窗口是最后一个窗口，则推出vim
