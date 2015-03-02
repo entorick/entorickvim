@@ -1,0 +1,6 @@
+--exclude=.svn
+--PHP-kinds=-fd
+--regex-PHP=/^[ \t]*[(private|protected|public|static|abstract)( \t)]*function[ \t]+([A-Za-z0-9_]+)[ \t]*\(/\1/F, function, functions/
+--regex-PHP=/^[ \t]*[(private|protected|public|static)]+[ \t]+\$([A-Za-z0-9_]+)[ \t]*/\1/P, property, properties/
+--regex-PHP=/^[ \t]*(const)[ \t]+([A-Za-z0-9_]+)[ \t]*/\2/D, const, constants/
+--PHP-kinds=+FPD)
