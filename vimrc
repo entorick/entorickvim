@@ -1,3 +1,10 @@
+" 使用说明
+" ',' + e      : 在新的标签页编辑.vimrc
+" CTRL + L     : 切换右侧的标签页
+" CTRL + H     : 切换左侧的标签页
+" F2           : 打开目录树
+" CTRL + X + O : 打开自动补全
+
 " 记录历史的行数
 set history=300
 
@@ -12,6 +19,13 @@ syntax on
 
 " 检测文件类型
 filetype on
+
+" 文件类型对应插件开启
+filetype plugin on
+filetype plugin indent on
+
+" BackSpace键功能
+set backspace=eol,start,indent
 
 " 对齐
 set cindent
@@ -42,6 +56,9 @@ set fileencodings=utf-8,cp936,gbk,default,latin1
 set encoding=utf-8
 set termencoding=utf-8
 
+" 开启ctags
+"set tags=tags; "配置生成的tags路径
+
 
 " 快捷命令起始符
 let mapleader = ","
@@ -53,3 +70,75 @@ nnoremap <C-h> gT
 
 " 编辑vim快捷键
 map <leader>e :tabnew ~/.vimrc<cr>
+
+
+
+" nerd tree配置,左侧目录树插件
+map <F2> :NERDTreeToggle<CR>
+
+
+" taglist配置 taglist use exuberant ctags
+let Tlist_Ctags_Cmd='/usr/bin/ctags' " ctags程序位置，不知道可以用which ctags查看
+let Tlist_Show_One_File=1 "不同时显示多个文件的tag，只显示当前文件的
+let Tlist_Exit_OnlyWindow=1 "如果taglist窗口是最后一个窗口，则推出vim
+let Tlist_Use_Right_Window=1 "在右侧显示taglist窗口
+"let tlist_php_settings='php;c:类名;i:接口;P:属性;D:常量;F:方法列表' "使用ctags时的参数，看ctags的支持可以用ctags --list-kinds或者ctags --list-kinds=php
+let tlist_php_settings='php;c:类名;F:方法列表' "使用ctags时的参数，看ctags的支持可以用ctags --list-kinds或者ctags --list-kinds=php
+let tlist_c_setting='c;c:类名;f:方法列表'
+" 定义taglist快捷键
+map <F3> :TlistToggle<CR>
+
+
+" PHP自动补全
+" VIM 7.0以上自带
+autocmd FileType python set omnifunc=pythoncomplete#Complete
+autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
+autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+autocmd FileType c set omnifunc=ccomplete#Complete
+" 启用自动补全
+set ofu=syntaxcomplete#Complete
+
+
+
+" 括号自动补全
+inoremap ( ()<Esc>i
+inoremap [ []<Esc>i
+inoremap { {<CR>}<Esc>O
+autocmd Syntax html,vim inoremap < <lt>><Esc>i| inoremap > <c-r>=ClosePair('>')<CR>
+inoremap ) <c-r>=ClosePair(')')<CR>
+inoremap ] <c-r>=ClosePair(']')<CR>
+inoremap } <c-r>=CloseBracket()<CR>
+inoremap " <c-r>=QuoteDelim('"')<CR>
+inoremap ' <c-r>=QuoteDelim("'")<CR>
+
+function ClosePair(char)
+    if getline('.')[col('.') - 1] == a:char
+        return "\<Right>"
+    else
+        return a:char
+    endif
+endf
+
+function CloseBracket()
+    if match(getline(line('.') + 1), '\s*}') < 0
+        return "\<CR>}"
+    else
+        return "\<ESC>j0f}a"
+    endif
+endf
+
+function QuoteDelim(char)
+    let line = getline('.')
+    let col = col('.')
+    if line[col - 2] == "\\"
+        return a:char
+    elseif line[col - 1] == a:char
+        return "\<Right>"
+    else
+        return a:char.a:char."\<Esc>i"
+    endif
+endf
+" End括号自动补全
