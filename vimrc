@@ -14,6 +14,9 @@ set autoread
 " 显示行号
 set nu
 
+" 显示所在行下划线
+set cursorline
+
 " 语法高亮
 syntax on
 
