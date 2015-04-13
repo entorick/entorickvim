@@ -35,6 +35,18 @@ set cindent
 set autoindent
 set smartindent
 
+" Enable enhanced command line completion.
+set wildmenu wildmode=list:full
+
+" Ignore these filenames during enhanced command line completion.
+set wildignore+=*.aux,*.out,*.toc " LaTeX intermediate files
+set wildignore+=*.jpg,*.bmp,*.gif " binary images
+set wildignore+=*.luac " Lua byte code
+set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest " compiled object files
+set wildignore+=*.pyc " Python byte code
+set wildignore+=*.spl " compiled spelling word lists
+set wildignore+=*.sw? " Vim swap files
+
 " 格式
 " tab为4个空格
 set tabstop=4
