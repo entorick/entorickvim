@@ -17,6 +17,9 @@ set nu
 " 显示所在行下划线
 set cursorline
 
+" 设定vim颜色
+set t_Co=256
+
 " 语法高亮
 syntax on
 
