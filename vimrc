@@ -18,7 +18,7 @@ set nu
 set cursorline
 
 " 设定vim颜色
-set t_Co=256
+"set t_Co=256
 
 " 语法高亮
 syntax on
